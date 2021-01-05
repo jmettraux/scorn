@@ -2,7 +2,7 @@
 # CHANGELOG.md
 
 
-## scorn 0.2.0 not yet released
+## scorn 0.2.0 released 2021-01-05
 
 * Don't pass the hostname is GET, it passes in Host:
 
