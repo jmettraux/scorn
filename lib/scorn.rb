@@ -40,15 +40,15 @@ module Scorn
         "Scorn #{VERSION} - " +
         [ 'Ruby', RUBY_VERSION, RUBY_RELEASE_DATE, RUBY_PLATFORM ].join(' ')
 
-      @ssl_verify_mode = OpenSSL::SSL::VERIFY_PEER
+      @ssl_verify_mode =
+        (opts[:ssl_verify_none] == :none || opts[:verify_none] == :none) ?
+        OpenSSL::SSL::VERIFY_NONE : # :-(
+        OpenSSL::SSL::VERIFY_PEER
     end
 
     def get(uri, opts)
 
       request(uri, make_get_req(uri, opts))
-    end
-
-    def ssl_verify_mode
     end
 
     protected
