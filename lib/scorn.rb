@@ -10,7 +10,7 @@ require 'net/http'
 
 module Scorn
 
-  VERSION = '0.1.0'
+  VERSION = '0.2.0'
 
   class << self
 
@@ -48,19 +48,24 @@ module Scorn
 
     def get(uri, opts)
 
-      request(uri, make_get_req(uri, opts))
+      u = uri.is_a?(String) ? URI(uri) : uri
+
+      request(u, make_get_req(u, opts))
     end
 
     protected
 
     def make_get_req(uri, opts)
 
-      req = Net::HTTP::Get.new(uri.to_s)
+      u = [ uri.path, uri.query ].compact.join('?')
+      u = '/' if u.length < 1
+
+      req = Net::HTTP::Get.new(u)
       req.instance_eval { @header.clear }
       def req.set_header(k, v); @header[k] = [ v ]; end
 
       req.set_header('User-Agent', user_agent)
-      #req.set_header('Accept', 'application/json')
+      req.set_header('Accept', '*/*')
 
       req
     end
@@ -69,12 +74,9 @@ module Scorn
 
     def request(uri, req)
 
-      u = uri.is_a?(String) ? URI(uri) : uri
-
       t0 = monow
 
-      http = make_net_http(u)
-#t.set_debug_output($stdout) if u.to_s.match?(/search/)
+      http = make_net_http(uri)
 
       res = http.request(req)
 
@@ -95,6 +97,9 @@ module Scorn
     def make_net_http(uri)
 
       http = Net::HTTP.new(uri.host, uri.port)
+
+      http.set_debug_output(@opts[:debug])
+      #http.set_debug_output($stderr)
 
       if uri.scheme == 'https'
         http.use_ssl = true
