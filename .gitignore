@@ -1,7 +1,10 @@
 
+.vimrc
+.viminfo
 .vimspec
 .bxsinfo.yaml
 .errors
 .rspec.out
 .ruby-version
+pkg/
 
