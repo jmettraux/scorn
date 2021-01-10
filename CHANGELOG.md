@@ -4,6 +4,8 @@
 
 ## scorn 0.3.0 not yet released
 
+* Make HTTP response available via `#_response`
+
 
 ## scorn 0.2.0 released 2021-01-05
 

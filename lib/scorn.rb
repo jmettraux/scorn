@@ -19,11 +19,18 @@ module Scorn
       res = Scorn::Client.new(opts).get(uri, opts)
 
       s = res.body
-
       st = s.strip
-      return (JSON.parse(st) rescue s) if st[0, 1] == '{' && st[-1, 1] == '}'
 
-      s
+      r =
+        if st[0, 1] == '{' && st[-1, 1] == '}'
+          JSON.parse(st) rescue s
+        else
+          s
+        end
+      class << r; attr_accessor :_response; end
+      r._response = res
+
+      r
     end
   end
 
@@ -81,10 +88,12 @@ module Scorn
       res = http.request(req)
 
       class << res
-        attr_accessor :_uri, :_elapsed, :_proxy
+        attr_accessor :_u, :_uri, :_request, :_elapsed, :_proxy
         def _headers; each_header.inject({}) { |h, (k, v)| h[k] = v; h }; end
       end
-      res._uri = uri.to_s
+      res._u = uri.to_s
+      res._uri = uri
+      res._request = req
       res._elapsed = monow - t0
       #res._proxy = detail_proxy(http)
 

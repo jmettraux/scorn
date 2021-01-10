@@ -25,6 +25,16 @@ describe Scorn do
 
       expect(r).to eq({ 'success' => 'true' })
     end
+
+    it 'returns a String but with a _response' do
+
+      r = Scorn.get('https://reqbin.com')
+
+      expect(r._response.code
+        ).to eq('200')
+      expect(r._response._headers['content-type']
+        ).to eq('text/html; charset=utf-8')
+    end
   end
 end
 
