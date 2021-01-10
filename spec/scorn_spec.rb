@@ -17,6 +17,9 @@ describe Scorn do
       r = Scorn.get('https://reqbin.com')
 
       expect(r).to match(/<script>/)
+      expect(r._response.code).to eq('200')
+      expect(r._response._c).to eq(200)
+      expect(r._response._cmsg).to eq('OK')
     end
 
     it 'gets JSON' do
@@ -58,6 +61,10 @@ describe Scorn do
 
       expect(r['headers']['Content-Type']
         ).to eq('application/x-www-form-urlencoded')
+
+      expect(r._response.code).to eq('200')
+      expect(r._response._c).to eq(200)
+      expect(r._response._cmsg).to eq('OK')
     end
   end
 end
