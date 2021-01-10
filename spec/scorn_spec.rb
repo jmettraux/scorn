@@ -21,9 +21,12 @@ describe Scorn do
 
     it 'gets JSON' do
 
-      r = Scorn.get('https://reqbin.com/echo/get/json')
+      r = Scorn.get('https://httpbin.org/get', json: true)
 
-      expect(r).to eq({ 'success' => 'true' })
+      expect(r['args']).to eq({})
+      expect(r['headers']['Host']).to eq('httpbin.org')
+      expect(r['headers']['Accept']).to eq('application/json')
+      expect(r['url']).to eq('https://httpbin.org/get')
     end
 
     it 'returns a String but with a _response' do
@@ -34,6 +37,27 @@ describe Scorn do
         ).to eq('200')
       expect(r._response._headers['content-type']
         ).to eq('text/html; charset=utf-8')
+    end
+  end
+
+  describe '.post' do
+
+    it 'posts application/x-www-form-urlencoded by default' do
+
+      r = Scorn.post(
+        'https://httpbin.org/post',
+        data: { source: 'src', target: 'tgt', n: -1 })
+
+      expect(r['args']).to eq({})
+      expect(r['data']).to eq('')
+      expect(r['files']).to eq({})
+      expect(r['form']).to eq('n' => '-1', 'source' => 'src', 'target' => 'tgt')
+      expect(r['json']).to eq(nil)
+
+      expect(r['url']).to eq('https://httpbin.org/post')
+
+      expect(r['headers']['Content-Type']
+        ).to eq('application/x-www-form-urlencoded')
     end
   end
 end

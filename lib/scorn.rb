@@ -16,21 +16,12 @@ module Scorn
 
     def get(uri, opts={})
 
-      res = Scorn::Client.new(opts).get(uri, opts)
+      Scorn::Client.new(opts).get(uri, opts)
+    end
 
-      s = res.body
-      st = s.strip
+    def post(uri, opts)
 
-      r =
-        if st[0, 1] == '{' && st[-1, 1] == '}'
-          JSON.parse(st) rescue s
-        else
-          s
-        end
-      class << r; attr_accessor :_response; end
-      r._response = res
-
-      r
+      Scorn::Client.new(opts).post(uri, opts)
     end
   end
 
@@ -53,26 +44,76 @@ module Scorn
         OpenSSL::SSL::VERIFY_PEER
     end
 
-    def get(uri, opts)
+    def get(uri, opts={})
 
       u = uri.is_a?(String) ? URI(uri) : uri
 
-      request(u, make_get_req(u, opts))
+      res = request(u, make_get_req(u, opts))
+
+      opts[:res] ? res : read_response(res)
+    end
+
+    def post(uri, opts)
+
+      u = uri.is_a?(String) ? URI(uri) : uri
+
+      res = request(u, make_post_req(u, opts))
+
+      opts[:res] ? res : read_response(res)
     end
 
     protected
 
     def make_get_req(uri, opts)
 
+      accept =
+        opts[:accept] ||
+        (opts[:json] && 'application/json') ||
+        '*/*'
+
+      make_req(
+        :get, uri,
+        agent: opts[:user_agent] || user_agent,
+        accept: accept)
+    end
+
+    def make_post_req(uri, opts)
+
+      req = make_req(
+        :post, uri,
+        agent: opts[:user_agent] || user_agent,
+        type: opts[:content_type] || 'application/x-www-form-urlencoded')
+
+      data = opts[:data]
+      req.set_form_data(data) if data
+
+      req
+    end
+
+    def make_req(type, uri, headers)
+
       u = [ uri.path, uri.query ].compact.join('?')
       u = '/' if u.length < 1
 
-      req = Net::HTTP::Get.new(u)
+      req =
+        case type
+        when :get then Net::HTTP::Get.new(u)
+        when :post then Net::HTTP::Post.new(u)
+        else fail ArgumentError.new("HTTP #{type} not implemented")
+        end
       req.instance_eval { @header.clear }
       def req.set_header(k, v); @header[k] = [ v ]; end
 
-      req.set_header('User-Agent', user_agent)
-      req.set_header('Accept', '*/*')
+      headers.each do |k, v|
+        hk =
+          case k
+          when :accept then 'Accept'
+          when :agent then 'User-Agent'
+          when :type then 'Content-Type'
+          else k.to_s
+          end
+        req.set_header(hk, v)
+      end
 
       req
     end
@@ -116,6 +157,23 @@ module Scorn
       end
 
       http
+    end
+
+    def read_response(res)
+
+      s = res.body
+      st = s.strip
+
+      r =
+        if st[0, 1] == '{' && st[-1, 1] == '}'
+          JSON.parse(st) rescue s
+        else
+          s
+        end
+      class << r; attr_accessor :_response; end
+      r._response = res
+
+      r
     end
   end
 end

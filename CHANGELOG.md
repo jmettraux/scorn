@@ -4,6 +4,7 @@
 
 ## scorn 0.3.0 not yet released
 
+* Implement basic POST form data
 * Make HTTP response available via `#_response`
 
 
