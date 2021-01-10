@@ -41,6 +41,15 @@ describe Scorn do
       expect(r._response._headers['content-type']
         ).to eq('text/html; charset=utf-8')
     end
+
+    it 'gets 404' do
+
+      r = Scorn.get('https://httpbin.org/status/404')
+
+      expect(r).to eq('')
+      expect(r._response._c). to eq(404)
+      expect(r._response._sta). to eq('Not Found')
+    end
   end
 
   describe '.post' do
