@@ -129,14 +129,14 @@ module Scorn
       res = http.request(req)
 
       class << res
-        attr_accessor :_u, :_uri, :_request, :_c, :_cmsg, :_elapsed, :_proxy
+        attr_accessor :_u, :_uri, :_request, :_c, :_sta, :_elapsed, :_proxy
         def _headers; each_header.inject({}) { |h, (k, v)| h[k] = v; h }; end
       end
       res._u = uri.to_s
       res._uri = uri
       res._request = req
       res._c = res.code.to_i
-      res._cmsg = WEBrick::HTTPStatus.reason_phrase(res.code) rescue ''
+      res._sta = WEBrick::HTTPStatus.reason_phrase(res.code) rescue ''
       res._elapsed = monow - t0
       #res._proxy = detail_proxy(http)
 

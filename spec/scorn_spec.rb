@@ -19,7 +19,7 @@ describe Scorn do
       expect(r).to match(/<script>/)
       expect(r._response.code).to eq('200')
       expect(r._response._c).to eq(200)
-      expect(r._response._cmsg).to eq('OK')
+      expect(r._response._sta).to eq('OK')
     end
 
     it 'gets JSON' do
@@ -64,7 +64,7 @@ describe Scorn do
 
       expect(r._response.code).to eq('200')
       expect(r._response._c).to eq(200)
-      expect(r._response._cmsg).to eq('OK')
+      expect(r._response._sta).to eq('OK')
     end
   end
 end
