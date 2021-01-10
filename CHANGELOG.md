@@ -2,7 +2,7 @@
 # CHANGELOG.md
 
 
-## scorn 0.3.0 not yet released
+## scorn 0.3.0 released 2021-01-11
 
 * Implement basic POST form data
 * Make HTTP response available via `#_response`
