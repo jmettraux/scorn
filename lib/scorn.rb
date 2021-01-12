@@ -35,7 +35,7 @@ module Scorn
 
       @user_agent =
         opts[:user_agent] ||
-        "Scorn #{VERSION} - " +
+        "scorn #{VERSION} - " +
         [ 'Ruby', RUBY_VERSION, RUBY_RELEASE_DATE, RUBY_PLATFORM ].join(' ')
 
       @ssl_verify_mode =
