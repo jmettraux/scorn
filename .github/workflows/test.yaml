@@ -17,5 +17,6 @@ jobs:
       - run: ruby --version
       - run: gem --version
       - run: bundle --version
+      - run: bundle install
       - run: bundle exec rspec
 
