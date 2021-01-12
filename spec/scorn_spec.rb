@@ -75,6 +75,21 @@ describe Scorn do
       expect(r._response._c).to eq(200)
       expect(r._response._sta).to eq('OK')
     end
+
+    it 'posts without doubling the Content-Type header' do
+
+      d = RequestDebugger.new
+
+      r = Scorn.post(
+        'https://httpbin.org/post',
+        data: { source: 'src', n: 11 },
+        debug: d)
+
+      expect(r['form']).to eq('n' => '11', 'source' => 'src')
+
+pp d.request_headers
+      expect(d.request_headers.count { |k, v| k == 'Content-Type' }).to eq(1)
+    end
   end
 end
 
