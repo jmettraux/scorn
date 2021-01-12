@@ -1,7 +1,7 @@
 
 # scorn
 
-![tests](https://github.com/jmettraux/scorn/workflows/test/badge.svg)
+[![tests](https://github.com/jmettraux/scorn/workflows/test/badge.svg)](https://github.com/jmettraux/scorn/actions)
 
 A stupid HTTP client library.
 
