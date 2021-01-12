@@ -101,8 +101,6 @@ module Scorn
         when :post then Net::HTTP::Post.new(u)
         else fail ArgumentError.new("HTTP #{type} not implemented")
         end
-      req.instance_eval { @header.clear }
-      def req.set_header(k, v); @header[k] = [ v ]; end
 
       headers.each do |k, v|
         hk =
@@ -112,7 +110,7 @@ module Scorn
           when :type then 'Content-Type'
           else k.to_s
           end
-        req.set_header(hk, v)
+        req[hk] = v
       end
 
       req

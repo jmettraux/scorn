@@ -87,7 +87,7 @@ describe Scorn do
 
       expect(r['form']).to eq('n' => '11', 'source' => 'src')
 
-pp d.request_headers
+#pp d.request_headers
       expect(d.request_headers.count { |k, v| k == 'Content-Type' }).to eq(1)
     end
   end
