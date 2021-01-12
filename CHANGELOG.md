@@ -2,7 +2,9 @@
 # CHANGELOG.md
 
 
-## scorn 0.3.1 not yet released
+## scorn 0.3.1 released 2021-01-12
+
+* Fix duplicate Content-Type headers when POSTing
 
 
 ## scorn 0.3.0 released 2021-01-11
