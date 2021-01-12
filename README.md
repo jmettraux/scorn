@@ -1,6 +1,8 @@
 
 # scorn
 
+![tests](https://github.com/jmettraux/scorn/workflows/test/badge.svg)
+
 A stupid HTTP client library.
 
 ```ruby
