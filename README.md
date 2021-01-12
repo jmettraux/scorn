@@ -2,6 +2,7 @@
 # scorn
 
 [![tests](https://github.com/jmettraux/scorn/workflows/test/badge.svg)](https://github.com/jmettraux/scorn/actions)
+[![gem version](https://badge.fury.io/rb/scorn.svg)](http://badge.fury.io/rb/scorn)
 
 A stupid HTTP client library.
 
