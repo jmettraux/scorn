@@ -4,6 +4,8 @@
 
 ## scorn 0.4.0 not yet released
 
+* Add HEAD requests
+
 
 ## scorn 0.3.1 released 2021-01-12
 

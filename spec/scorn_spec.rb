@@ -10,6 +10,19 @@ require 'spec_helper'
 
 describe Scorn do
 
+  describe '.head' do
+
+    it 'heads' do
+
+      r = Scorn.head('https://reqbin.com')
+
+      expect(r).to eq('')
+      expect(r._response.code).to eq('200')
+      expect(r._response._c).to eq(200)
+      expect(r._response._sta).to eq('OK')
+    end
+  end
+
   describe '.get' do
 
     it 'gets' do

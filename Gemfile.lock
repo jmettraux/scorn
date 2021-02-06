@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    scorn (0.3.1)
+    scorn (0.4.0)
 
 GEM
   remote: https://rubygems.org/

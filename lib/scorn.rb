@@ -14,6 +14,11 @@ module Scorn
 
   class << self
 
+    def head(uri, opts={})
+
+      Scorn::Client.new(opts).head(uri, opts)
+    end
+
     def get(uri, opts={})
 
       Scorn::Client.new(opts).get(uri, opts)
@@ -44,6 +49,15 @@ module Scorn
         OpenSSL::SSL::VERIFY_PEER
     end
 
+    def head(uri, opts={})
+
+      u = uri.is_a?(String) ? URI(uri) : uri
+
+      res = request(u, make_head_req(u, opts))
+
+      opts[:res] ? res : read_response(res)
+    end
+
     def get(uri, opts={})
 
       u = uri.is_a?(String) ? URI(uri) : uri
@@ -63,6 +77,19 @@ module Scorn
     end
 
     protected
+
+    def make_head_req(uri, opts)
+
+      accept =
+        opts[:accept] ||
+        (opts[:json] && 'application/json') ||
+        '*/*'
+
+      make_req(
+        :head, uri,
+        agent: opts[:user_agent] || user_agent,
+        accept: accept)
+    end
 
     def make_get_req(uri, opts)
 
@@ -97,6 +124,7 @@ module Scorn
 
       req =
         case type
+        when :head then Net::HTTP::Head.new(u)
         when :get then Net::HTTP::Get.new(u)
         when :post then Net::HTTP::Post.new(u)
         else fail ArgumentError.new("HTTP #{type} not implemented")
@@ -162,11 +190,13 @@ module Scorn
     def read_response(res)
 
       s = res.body
-      st = s.strip
+      st = s ? s.strip : ''
 
       r =
         if st[0, 1] == '{' && st[-1, 1] == '}'
           JSON.parse(st) rescue s
+        elsif s == nil
+          ''
         else
           s
         end
