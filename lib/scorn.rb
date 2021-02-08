@@ -44,7 +44,10 @@ module Scorn
         [ 'Ruby', RUBY_VERSION, RUBY_RELEASE_DATE, RUBY_PLATFORM ].join(' ')
 
       @ssl_verify_mode =
-        (opts[:ssl_verify_none] == :none || opts[:verify_none] == :none) ?
+        (
+          opts[:ssl_verify] == :none || opts[:verify] == :none ||
+          opts[:ssl_verify] == false || opts[:verify] == false
+        ) ?
         OpenSSL::SSL::VERIFY_NONE : # :-(
         OpenSSL::SSL::VERIFY_PEER
     end

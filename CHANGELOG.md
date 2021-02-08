@@ -4,6 +4,7 @@
 
 ## scorn 0.4.0 not yet released
 
+* Fix :verify or :ssl_verify client option
 * Add HEAD requests
 
 
