@@ -2,7 +2,7 @@
 # CHANGELOG.md
 
 
-## scorn 0.4.0 not yet released
+## scorn 0.4.0 released 2025-08-01
 
 * Parse "[]" JSON arrays too
 * Accept :auth or :authentication
