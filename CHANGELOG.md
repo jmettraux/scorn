@@ -4,6 +4,8 @@
 
 ## scorn 0.4.0 not yet released
 
+* Parse "[]" JSON arrays too
+* Accept :auth or :authentication
 * Fix :verify or :ssl_verify client option
 * Add HEAD requests
 
