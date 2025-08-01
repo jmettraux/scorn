@@ -189,7 +189,7 @@ module Scorn
       s = res.body
       st = s ? s.strip : ''
 
-      a_z = st[0, 1] + st[-1, 1]
+      a_z = "#{st[0, 1]}#{st[-1, 1]}"
 
       r =
         if a_z == '{}' || a_z == '[]'
