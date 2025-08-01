@@ -83,41 +83,44 @@ module Scorn
 
     def make_head_req(uri, opts)
 
-      accept =
-        opts[:accept] ||
-        (opts[:json] && 'application/json') ||
-        '*/*'
-
-      make_req(
-        :head, uri,
-        agent: opts[:user_agent] || user_agent,
-        accept: accept)
+      make_req(:head, uri, gather_headers(:head, opts))
     end
 
     def make_get_req(uri, opts)
 
-      accept =
-        opts[:accept] ||
-        (opts[:json] && 'application/json') ||
-        '*/*'
-
-      make_req(
-        :get, uri,
-        agent: opts[:user_agent] || user_agent,
-        accept: accept)
+      make_req(:get, uri, gather_headers(:get, opts))
     end
 
     def make_post_req(uri, opts)
 
-      req = make_req(
-        :post, uri,
-        agent: opts[:user_agent] || user_agent,
-        type: opts[:content_type] || 'application/x-www-form-urlencoded')
+      req = make_req(:post, uri, gather_headers(:post, opts))
 
       data = opts[:data]
       req.set_form_data(data) if data
 
       req
+    end
+
+    def gather_headers(verb, opts)
+
+      h = {}
+
+      h['Accept'] =
+        opts[:accept] ||
+        (opts[:json] && 'application/json') ||
+        '*/*'
+      h['Agent'] =
+        opts[:user_agent] || user_agent
+      h['Authorization'] =
+        opts[:authorization] || opts[:auth]
+
+      h['Content-Type'] =
+        opts[:content_type] || 'application/x-www-form-urlencoded' \
+          if verb == :post
+
+      h.compact!
+
+      h
     end
 
     def make_req(type, uri, headers)
@@ -133,16 +136,7 @@ module Scorn
         else fail ArgumentError.new("HTTP #{type} not implemented")
         end
 
-      headers.each do |k, v|
-        hk =
-          case k
-          when :accept then 'Accept'
-          when :agent then 'User-Agent'
-          when :type then 'Content-Type'
-          else k.to_s
-          end
-        req[hk] = v
-      end
+      headers.each { |k, v| req[k] = v }
 
       req
     end
@@ -195,8 +189,10 @@ module Scorn
       s = res.body
       st = s ? s.strip : ''
 
+      a_z = st[0, 1] + st[-1, 1]
+
       r =
-        if st[0, 1] == '{' && st[-1, 1] == '}'
+        if a_z == '{}' || a_z == '[]'
           JSON.parse(st) rescue s
         elsif s == nil
           ''
