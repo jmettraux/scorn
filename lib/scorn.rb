@@ -118,6 +118,10 @@ module Scorn
         opts[:content_type] || 'application/x-www-form-urlencoded' \
           if verb == :post
 
+      opts.each do |k, v|
+        h[k] = v if k.starts_with(/X-/)
+      end
+
       h.compact!
 
       h
