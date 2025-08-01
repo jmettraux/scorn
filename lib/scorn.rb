@@ -119,7 +119,7 @@ module Scorn
           if verb == :post
 
       opts.each do |k, v|
-        h[k] = v if k.starts_with(/X-/)
+        h[k] = v if k.start_with?(/X-/)
       end
 
       h.compact!
