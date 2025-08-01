@@ -1,10 +1,13 @@
 
-.vimrc
-.viminfo
-.vimspec
+.vim*
 .bxsinfo.yaml
 .errors
 .rspec.out
 .ruby-version
 pkg/
+
+.chat.md
+.openai.*
+.deep.md
+.deepseek.*
 
