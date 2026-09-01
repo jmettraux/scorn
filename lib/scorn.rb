@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'json'
 require 'time'
@@ -10,7 +11,7 @@ require 'net/http'
 
 module Scorn
 
-  VERSION = '0.4.0'
+  VERSION = '0.4.1'
 
   class << self
 
