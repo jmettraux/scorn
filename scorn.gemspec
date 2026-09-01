@@ -37,7 +37,8 @@ A stupid HTTP client library. Consider with scorn.
     "#{s.name}.gemspec",
   ]
 
-  #s.add_runtime_dependency 'raabro', '~> 1.4'
+  s.add_runtime_dependency 'base64'
+  s.add_runtime_dependency 'webrick'
 
   s.add_development_dependency 'rspec', '~> 3.8'
 
