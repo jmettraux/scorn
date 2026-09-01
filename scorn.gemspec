@@ -40,7 +40,7 @@ A stupid HTTP client library. Consider with scorn.
   s.add_runtime_dependency 'base64'
   s.add_runtime_dependency 'webrick'
 
-  s.add_development_dependency 'rspec', '~> 3.8'
+  s.add_development_dependency 'probatio', '~> 1.6'
 
   s.require_path = 'lib'
 end

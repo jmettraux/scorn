@@ -1,8 +1,10 @@
 
-.vim*
-.bxsinfo.yaml
-.errors
-.rspec.out
+.vimgrep
+.viminfo
+
+.test-point
+.probatio-*
+
 .ruby-version
 pkg/
 
@@ -10,4 +12,6 @@ pkg/
 .openai.*
 .deep.md
 .deepseek.*
+.claude.*
+.klaude.*
 

@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: [ '2.7', '3.4', '4.1' ]
           bundler-cache: true
       - run: ruby --version
       - run: gem --version
       - run: bundle --version
-      - run: bundle exec rspec --force-color --format documentation
+      - run: bundle exec proba spec/
 

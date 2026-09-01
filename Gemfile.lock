@@ -1,32 +1,30 @@
 PATH
   remote: .
   specs:
-    scorn (0.4.0)
+    scorn (0.4.1)
+      base64
+      webrick
 
 GEM
   remote: https://rubygems.org/
   specs:
-    diff-lcs (1.4.4)
-    rspec (3.10.0)
-      rspec-core (~> 3.10.0)
-      rspec-expectations (~> 3.10.0)
-      rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.1)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.1)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-support (3.10.1)
+    base64 (0.3.0)
+    colorato (1.1.0)
+    diff-lcs (1.6.2)
+    probatio (1.6.2)
+      colorato (~> 1.0)
+      diff-lcs (~> 1.6)
+      stringio
+    stringio (3.2.0)
+    webrick (1.9.2)
 
 PLATFORMS
   ruby
+  x86_64-openbsd-7.8
 
 DEPENDENCIES
-  rspec (~> 3.8)
+  probatio (~> 1.6)
   scorn!
 
 BUNDLED WITH
-   2.1.4
+   2.6.9
