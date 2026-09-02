@@ -8,6 +8,12 @@
 
 group Scorn do
 
+  before do
+
+    sleep 0.7
+      # so that reqbin.com isn't overwhelmed
+  end
+
   group '.head' do
 
     test 'heads' do
