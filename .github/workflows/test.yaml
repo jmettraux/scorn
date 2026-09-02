@@ -15,7 +15,9 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         #ruby: [ jruby ]
-        ruby: [ '2.7', '3.4', '4.0', 'jruby-9', 'jruby-10' ]
+        #ruby: [ '2.7', '3.4', '4.0', 'jruby-9', 'jruby-10' ]
+        ruby: [ '4.0' ]
+          # just test once, else reqbin says "just a moment..."
         experimental: [ false ]
       fail-fast: false
     runs-on: ${{matrix.os}}
