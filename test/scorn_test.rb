@@ -65,6 +65,21 @@ group Scorn do
       assert r._response._c, 404
       assert r._response._sta, 'Not Found'
     end
+
+    test 'gets 304' do
+
+      r = Scorn.get('https://httpbin.org/etag/fubar')
+
+      assert r._response._c, 200
+
+      r = Scorn.get('https://httpbin.org/etag/fubar', etag: 'fubar')
+
+      assert r._response._c, 304
+
+      r = Scorn.get('https://httpbin.org/etag/fubar', if_none_match: 'fubar')
+
+      assert r._response._c, 304
+    end
   end
 
   group '.post' do

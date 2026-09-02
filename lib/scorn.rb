@@ -118,6 +118,10 @@ module Scorn
         opts[:content_type] || 'application/x-www-form-urlencoded' \
           if verb == :post
 
+      h['If-None-Match'] =
+        opts[:etag] || opts[:if_none_match] \
+          if verb == :get || verb == :head
+
       opts.each do |k, v|
         h[k] = v if k.start_with?(/X-/)
       end

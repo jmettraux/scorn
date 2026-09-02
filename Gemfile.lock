@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    scorn (0.4.1)
+    scorn (0.5.0)
       base64
       ostruct
       webrick

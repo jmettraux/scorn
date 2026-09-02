@@ -4,6 +4,8 @@
 
 ## scorn 0.5.0 not yet released
 
+* Implement :etag/:if_none_match opt
+
 
 ## scorn 0.4.1 released 2026-09-02
 
