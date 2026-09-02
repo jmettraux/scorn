@@ -2,6 +2,9 @@
 # CHANGELOG.md
 
 
+## scorn 0.5.0 not yet released
+
+
 ## scorn 0.4.1 released 2026-09-02
 
 * Tidy dependencies
