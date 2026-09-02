@@ -10,7 +10,7 @@ group Scorn do
 
   before do
 
-    sleep 0.7
+    sleep 1.4
       # so that reqbin.com isn't overwhelmed
   end
 
