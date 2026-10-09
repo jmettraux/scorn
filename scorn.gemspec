@@ -38,7 +38,6 @@ A stupid HTTP client library. Consider with scorn.
   ]
 
   s.add_runtime_dependency 'base64'
-  s.add_runtime_dependency 'webrick'
   s.add_runtime_dependency 'ostruct'
 
   s.add_development_dependency 'probatio', '~> 1.6'
