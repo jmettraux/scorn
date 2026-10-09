@@ -4,6 +4,7 @@
 
 ## scorn 0.5.0 not yet released
 
+* Accept `x_foobar_header: 'hello'`
 * `r._response._request._headers`
 * Implement :etag/:if_none_match opt
 

@@ -122,7 +122,8 @@ module Scorn
           if verb == :get || verb == :head
 
       opts.each do |k, v|
-        h[k] = v if k.start_with?(/X-/)
+        k = k.to_s.gsub('_', '-')
+        h[k] = v if k.start_with?(/x-/i)
       end
 
       h.compact!
