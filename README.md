@@ -9,6 +9,7 @@ A stupid HTTP client library.
 ```ruby
 r = Scorn.get('https://example.com/data.json')
 
+p r # => { "data" => [ "foo", "bar" ] }
 p r._response._c # => 200
 ```
 

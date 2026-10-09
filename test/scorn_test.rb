@@ -84,14 +84,15 @@ group Scorn do
     test 'passes X- headers' do
 
       r = Scorn.get(
-        'https://reqbin.com',
+        'https://reqbin.com/echo/get/json',
         'X-foobar' => 'ok',
         :x_france_status => 'riot')
 
-      assert r, /<script>/
-      assert r._response._c, 200
+      assert r, { 'success' => 'true' }
 
-#pp r._response._request._headers
+      assert r._response._c, 200
+      assert r._response._headers['content-type'], 'application/json'
+
       assert r._response._request._headers['host'], 'reqbin.com'
       assert r._response._request._headers['x-foobar'], 'ok'
       assert r._response._request._headers['x-france-status'], 'riot'
