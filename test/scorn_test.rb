@@ -80,6 +80,17 @@ group Scorn do
 
       assert r._response._c, 304
     end
+
+    test 'passes X- headers' do
+
+      r = Scorn.get('https://reqbin.com', 'X-foobar' => 'ok')
+
+      assert r, /<script>/
+      assert r._response._c, 200
+
+      assert r._response._request._headers['host'], 'reqbin.com'
+      assert r._response._request._headers['x-foobar'], 'ok'
+    end
   end
 
   group '.post' do

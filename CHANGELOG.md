@@ -4,6 +4,7 @@
 
 ## scorn 0.5.0 not yet released
 
+* `r._response._request._headers`
 * Implement :etag/:if_none_match opt
 
 

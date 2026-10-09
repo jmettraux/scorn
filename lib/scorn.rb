@@ -145,6 +145,10 @@ module Scorn
 
       headers.each { |k, v| req[k] = v }
 
+      class << req
+        def _headers; each_header.inject({}) { |h, (k, v)| h[k] = v; h }; end
+      end
+
       req
     end
 
