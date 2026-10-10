@@ -38,6 +38,24 @@ p r['form'] # => { 'n' => '-1', 'source' => 'src', 'target' => 'tgt' }
 ```
 
 
+### Options:
+
+* `accept:` for the `Accept` header
+* `user_agent:` for the `Agent` header
+* `uauthorization:` or `auth:` for the `Authorization` header
+* `content_type:` for the `Content-Type` header
+* `etag:` or `if_none_match:` for the `If-None-Match` header
+
+```ruby
+r = Scorn.get(
+  'https://httpbin.org/get',
+  auth: 'Bearer toto-nada-xplus',
+  json: true)
+
+p r['headers']['Authorization'] # => 'Bearer toto-nada-xplus'
+```
+
+
 ## LICENSE
 
 MIT, see [LICENSE.txt](LICENSE.txt)
