@@ -1,6 +1,8 @@
 
 .vimgrep
 .viminfo
+.vimfuzz2
+.zapicat.index
 
 .test-point
 .probatio-*
