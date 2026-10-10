@@ -41,10 +41,11 @@ p r['form'] # => { 'n' => '-1', 'source' => 'src', 'target' => 'tgt' }
 ### Options:
 
 * `accept:` for the `Accept` header
-* `user_agent:` for the `Agent` header
 * `uauthorization:` or `auth:` for the `Authorization` header
 * `content_type:` for the `Content-Type` header
 * `etag:` or `if_none_match:` for the `If-None-Match` header
+* `user_agent:` for the `Agent` header
+* `ssl_verify: false`, `ssl_verify: :none`, `verify: false`, as expected
 
 ```ruby
 r = Scorn.get(
