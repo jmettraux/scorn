@@ -1,4 +1,5 @@
-# frozen_string_literal: true
+
+# scorn.rb
 
 require 'json'
 require 'time'
