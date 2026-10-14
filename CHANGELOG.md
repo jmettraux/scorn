@@ -2,6 +2,9 @@
 # CHANGELOG.md
 
 
+## scorn 0.6.0 not yet released
+
+
 ## scorn 0.5.0 released 2026-10-10
 
 * Accept `x_foobar_header: 'hello'`
