@@ -135,6 +135,23 @@ group Scorn do
       assert rh.count { |k, v| k == 'Content-Type' }, 1
       assert rh['Content-Type'], 'application/x-www-form-urlencoded'
     end
+
+    test 'posts json:d' do
+
+      r = Scorn.post(
+        'https://httpbin.org/post',
+        json: { who: 'Doomberg', what: 'buy gold', when: -1 },
+        debug: Scorn::Debugger.new)
+
+#puts r._debug.to_s
+#pp r
+      assert r['json'], {
+        'who' => 'Doomberg', 'what' => 'buy gold', 'when' => -1 }
+
+      assert r._response._c, 200
+      assert r['url'], 'https://httpbin.org/post'
+      assert r['headers']['Accept'], 'application/json'
+    end
   end
 end
 

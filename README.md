@@ -37,6 +37,18 @@ p r.class # => Hash
 p r['form'] # => { 'n' => '-1', 'source' => 'src', 'target' => 'tgt' }
 ```
 
+```ruby
+r = Scorn.post(
+  'https://httpbin.org/post',
+  json: { who: 'Doomberg', what: 'buy gold', when: -1 },
+  debug: Scorn::Debugger.new)
+
+p r['json'] # => { 'who' => 'Doomberg', 'what' => 'buy gold', 'when' => -1 }
+
+p r._response._c # =>  200
+p r['url'] # =>  'https://httpbin.org/post'
+p r['headers']['Accept'] # =>  'application/json'
+```
 
 ### Options:
 

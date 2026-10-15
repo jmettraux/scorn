@@ -97,7 +97,22 @@ module Scorn
       req = make_req(:post, uri, gather_headers(:post, opts))
 
       data = opts[:data]
-      req.set_form_data(data) if data
+      json = opts[:json]
+
+      if data
+
+        req.set_form_data(data)
+
+      elsif json.is_a?(Hash) || json.is_a?(Array)
+
+        req['Content-Type'] = 'application/json'
+        req.body = JSON.dump(json)
+
+      elsif json.is_a?(String)
+
+        req['Content-Type'] = 'application/json'
+        req.body = json
+      end
 
       req
     end

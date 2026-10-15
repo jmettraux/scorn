@@ -4,6 +4,7 @@
 
 ## scorn 0.6.0 not yet released
 
+* Use json:d to post JSON (body not form)
 * Introduce Scorn::Debugger
 
 
