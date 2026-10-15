@@ -124,17 +124,16 @@ group Scorn do
 
     test 'posts without doubling the Content-Type header' do
 
-      d = RequestDebugger.new
-
       r = Scorn.post(
         'https://httpbin.org/post',
         data: { source: 'src', n: 11 },
-        debug: d)
+        debug: Scorn::Debugger.new)
 
       assert r['form'], { 'n' => '11', 'source' => 'src' }
 
-#pp d.request_headers
-      assert d.request_headers.count { |k, v| k == 'Content-Type' }, 1
+      rh = r._debug.request_headerh
+      assert rh.count { |k, v| k == 'Content-Type' }, 1
+      assert rh['Content-Type'], 'application/x-www-form-urlencoded'
     end
   end
 end

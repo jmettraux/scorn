@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    scorn (0.5.0)
+    scorn (0.6.0)
       base64
       ostruct
 

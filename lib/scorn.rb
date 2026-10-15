@@ -213,8 +213,9 @@ module Scorn
         else
           s
         end
-      class << r; attr_accessor :_response; end
+      class << r; attr_accessor :_response, :_debug; end
       r._response = res
+      r._debug = @opts[:debug]
 
       r
     end
@@ -254,6 +255,61 @@ module Scorn
       511 => 'Network Authentication Required'
 
         }.freeze
+  end
+
+  class Debugger
+
+    attr_reader :a
+
+    def initialize; @a = []; end
+
+    def <<(l); @a << l; end
+
+    def to_s; @a.join("\n"); end
+
+    def request_lines
+
+      @a.find { |s| s.match?(/\A"(GET|POST|HEAD|PUT|DELETE) /) }.split('\r\n')
+    end
+
+    def request_headera
+
+      request_lines
+        .inject([]) { |a, l|
+          m = l.match(/\A([-a-zA-Z0-9]+): (.+)\z/)
+          a << [ m[1], m[2] ] if m
+          a }
+    end
+
+    def response_header_lines
+
+      @a
+        .take_while { |l|
+          l != '-> "\\r\\n"\n' }
+        .inject([]) { |a, l|
+          m = l.match(/\A-> "(.+)\\r\\n"\n\z/)
+          a << m[1] if m
+          a }
+    end
+
+    def response_headera
+
+      response_header_lines
+        .inject([]) { |a, l|
+          m = l.match(/\A([A-Z][-a-zA-Z0-9]*):\s*(.+)\z/)
+          a << [ m[1], m[2] ] if m
+          a }
+    end
+
+    def request_headerh
+
+      request_headera.inject({}) { |h, (k, v)| h[k] = v; h }
+    end
+
+    def response_headerh
+
+      response_headera.inject({}) { |h, (k, v)| h[k] = v; h }
+    end
   end
 end
 
