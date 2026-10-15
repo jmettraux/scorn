@@ -2,7 +2,7 @@
 # CHANGELOG.md
 
 
-## scorn 0.6.0 not yet released
+## scorn 0.6.0 released 2026-10-15
 
 * Use json:d to post JSON (body not form)
 * Introduce Scorn::Debugger
