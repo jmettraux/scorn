@@ -265,7 +265,7 @@ module Scorn
 
     def <<(l); @a << l; end
 
-    def to_s; @a.join("\n"); end
+    def to_s; @a.join(); end
 
     def request_lines
 
