@@ -4,6 +4,8 @@
 
 ## scorn 0.6.0 not yet released
 
+* Introduce Scorn::Debugger
+
 
 ## scorn 0.5.0 released 2026-10-10
 
